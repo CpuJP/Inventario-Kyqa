@@ -2,11 +2,9 @@ package com.inventario.parque.kyqa.InventarioKyqa.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.validation.FieldError;
-
-import java.io.Serializable;
 import java.util.Set;
 
+//Anotaciones Para Lombok
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +15,7 @@ import java.util.Set;
 @Table(name = "inventario")
 public class Inventario{
 
+    //Anotaciones Para JPA
     @Id
     @Column(name = "IDInventario", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +42,7 @@ public class Inventario{
     @Column(name = "areainventario", length = 50, nullable = false)
     private String AreaInventario;
 
+    //Relación de Muchos a Muchos Entre Inventario y Prestamos
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "inventario_prestamo",
@@ -50,6 +50,7 @@ public class Inventario{
             inverseJoinColumns = @JoinColumn(name = "id_prestamo", nullable = false))
     private Set<Prestamo> prestamos;
 
+    //Getters y Setters
     public Long getIdInventario() {
         return idInventario;
     }
@@ -122,9 +123,11 @@ public class Inventario{
         this.prestamos = prestamos;
     }
 
+    //Creación de plantilla builder
     public Inventario(Long idInventario, String nombreObjeto, String descripcion, Integer total, Integer disponible, String observacion, String foto, String areaInventario) {
     }
 
+    //Creación del Builder
     public static class Builder {
         private Long idInventario;
         private String NombreObjeto;
@@ -135,11 +138,13 @@ public class Inventario{
         private String Foto;
         private String AreaInventario;
 
+        //Creación Método Build
         Inventario build() {
             return new Inventario(this.idInventario, this.NombreObjeto, this.Descripcion,
                     this.Total, this.Disponible, this.Observacion, this.Foto, this.AreaInventario);
         }
 
+        //Getters y Setters Builder
         public Long getIdInventario() {
             return idInventario;
         }
