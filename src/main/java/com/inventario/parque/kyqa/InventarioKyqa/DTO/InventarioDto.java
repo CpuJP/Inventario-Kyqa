@@ -1,8 +1,10 @@
 package com.inventario.parque.kyqa.InventarioKyqa.DTO;
 
+import com.inventario.parque.kyqa.InventarioKyqa.Entity.Prestamo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.inventario.parque.kyqa.InventarioKyqa.Entity.Inventario} entity
@@ -17,4 +19,5 @@ public class InventarioDto implements Serializable {
     private final String Observacion;
     private final String Foto;
     private final String AreaInventario;
+    private final Set<Prestamo> prestamos;
 }

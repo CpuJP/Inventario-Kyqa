@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.inventario.parque.kyqa.InventarioKyqa.Entity.Prestamo} entity
@@ -19,4 +20,6 @@ public class PrestamoDto implements Serializable {
     private final Estado EstadoIngreso;
     private final String FirmaIngreso;
     private final String Area;
+    private final Set<InventarioDto> inventarios;
+    private final Set<PersonaDto> personas;
 }
