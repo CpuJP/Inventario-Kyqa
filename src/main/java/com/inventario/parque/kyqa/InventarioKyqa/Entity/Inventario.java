@@ -1,52 +1,94 @@
 package com.inventario.parque.kyqa.InventarioKyqa.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import java.util.Set;
 
-//Anotaciones Para Lombok
+import java.io.Serializable;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
-@Entity(name = "Inventario")
-@Table(name = "inventario")
-public class Inventario{
+@Entity(name = Inventario.ENTITY_NAME)
+@Table(name = Inventario.TABLE_NAME, schema = "kyqa")
+public class Inventario implements Serializable {
+    public static final String ENTITY_NAME = "Inventario";
+    public static final String TABLE_NAME = "inventario";
+    public static final String COLUMN_ID_NAME = "idInventario";
+    public static final String COLUMN_NOMBREOBJETO_NAME = "nombreObjeto";
+    public static final String COLUMN_DESCRIPCION_NAME = "descripcion";
+    public static final String COLUMN_TOTAL_NAME = "total";
+    public static final String COLUMN_DISPONIBLE_NAME = "disponible";
+    public static final String COLUMN_OBSERVACIONES_NAME = "observaciones";
+    public static final String COLUMN_FOTO_NAME = "foto";
+    public static final String COLUMN_AREAINVENTARIO_NAME = "areaInventario";
+    private static final long serialVersionUID = 7595057014807523670L;
 
-    //Anotaciones Para JPA
+
+    private Integer id;
+
+    private String nombreObjeto;
+
+    private String descripcion;
+
+    private Integer total;
+
+    private Integer disponible;
+
+    private String observaciones;
+
+    private String foto;
+
+    private String areaInventario;
+
     @Id
-    @Column(name = "IdInventario", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idInventario;
+    @Column(name = COLUMN_ID_NAME, nullable = false)
+    public Integer getId() {
+        return id;
+    }
 
-    @Column(name = "NombreObjeto", nullable = false, length = 50)
-    private String NombreObjeto;
+    @Size(max = 45)
+    @Column(name = COLUMN_NOMBREOBJETO_NAME, length = 45)
+    public String getNombreObjeto() {
+        return nombreObjeto;
+    }
 
-    @Column(name = "Descripcion", length = 150)
-    private String Descripcion;
+    @Size(max = 100)
+    @Column(name = COLUMN_DESCRIPCION_NAME, length = 100)
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-    @Column(name = "Total", nullable = false)
-    private Integer Total;
+    @Column(name = COLUMN_TOTAL_NAME)
+    public Integer getTotal() {
+        return total;
+    }
 
-    @Column(name = "Disponible", nullable = false)
-    private Integer Disponible;
+    @Column(name = COLUMN_DISPONIBLE_NAME)
+    public Integer getDisponible() {
+        return disponible;
+    }
 
-    @Column(name = "Observaciones", length = 150)
-    private String Observacion;
+    @Size(max = 45)
+    @Column(name = COLUMN_OBSERVACIONES_NAME, length = 45)
+    public String getObservaciones() {
+        return observaciones;
+    }
 
-    @Column(name = "Foto")
-    private String Foto;
+    @Size(max = 200)
+    @Column(name = COLUMN_FOTO_NAME, length = 200)
+    public String getFoto() {
+        return foto;
+    }
 
-    @Column(name = "AreaInventario", length = 50, nullable = false)
-    private String AreaInventario;
+    @Size(max = 45)
+    @Column(name = COLUMN_AREAINVENTARIO_NAME, length = 45)
+    public String getAreaInventario() {
+        return areaInventario;
+    }
 
-    //Relación de Muchos a Muchos Entre Inventario y Prestamos
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "inventario_prestamo",
-            joinColumns = @JoinColumn(name = "id_inventario", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "id_prestamo", nullable = false))
-    private Set<Prestamo> prestamos;
 }

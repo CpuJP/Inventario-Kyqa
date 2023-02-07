@@ -1,23 +1,26 @@
 package com.inventario.parque.kyqa.InventarioKyqa.DTO;
 
-import com.inventario.parque.kyqa.InventarioKyqa.Entity.Prestamo;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * A DTO for the {@link com.inventario.parque.kyqa.InventarioKyqa.Entity.Inventario} entity
  */
 @Data
 public class InventarioDto implements Serializable {
-    private final Long idInventario;
-    private final String NombreObjeto;
-    private final String Descripcion;
-    private final Integer Total;
-    private final Integer Disponible;
-    private final String Observacion;
-    private final String Foto;
-    private final String AreaInventario;
-    private final Set<Prestamo> prestamos;
+    private final Integer id;
+    @Size(max = 45)
+    private final String nombreObjeto;
+    @Size(max = 100)
+    private final String descripcion;
+    private final Integer total;
+    private final Integer disponible;
+    @Size(max = 45)
+    private final String observaciones;
+    @Size(max = 200)
+    private final String foto;
+    @Size(max = 45)
+    private final String areaInventario;
 }

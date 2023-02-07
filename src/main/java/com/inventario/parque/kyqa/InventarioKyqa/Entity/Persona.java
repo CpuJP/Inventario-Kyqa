@@ -1,47 +1,93 @@
 package com.inventario.parque.kyqa.InventarioKyqa.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.Set;
+import java.io.Serializable;
 
-//Anotaciones Para Lombok
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
-@Entity(name = "Persona")
-@Table(name = "persona")
-public class Persona {
+@Entity(name = Persona.ENTITY_NAME)
+@Table(name = Persona.TABLE_NAME, schema = "kyqa", indexes = {
+        @Index(name = "celular_UNIQUE", columnList = "celular", unique = true)
+})
+public class Persona implements Serializable {
+    public static final String ENTITY_NAME = "Persona";
+    public static final String TABLE_NAME = "persona";
+    public static final String COLUMN_ID_NAME = "idPersona";
+    public static final String COLUMN_DOCUMENTO_NAME = "documento";
+    public static final String COLUMN_PRIMERNOMBRE_NAME = "primerNombre";
+    public static final String COLUMN_SEGUNDONOMBRE_NAME = "segundoNombre";
+    public static final String COLUMN_PRIMERAPELLIDO_NAME = "primerApellido";
+    public static final String COLUMN_SEGUNDOAPELLIDO_NAME = "segundoApellido";
+    public static final String COLUMN_CELULAR_NAME = "celular";
+    private static final long serialVersionUID = -7797848499666670300L;
 
-    //Anotaciones Para JPA
+
+    private Integer id;
+
+    private String documento;
+
+    private String primerNombre;
+
+    private String segundoNombre;
+
+    private String primerApellido;
+
+    private String segundoApellido;
+
+    private String celular;
+
     @Id
-    @Column(name = "IdPersona", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPersona;
+    @Column(name = COLUMN_ID_NAME, nullable = false)
+    public Integer getId() {
+        return id;
+    }
 
-    @Column(name = "Documento", nullable = false)
-    private String Documento;
+    @Size(max = 20)
+    @NotNull
+    @Column(name = COLUMN_DOCUMENTO_NAME, nullable = false, length = 20)
+    public String getDocumento() {
+        return documento;
+    }
 
-    @Column(name = "PrimerNombre", length = 50, nullable = false)
-    private String PrimerNombre;
+    @Size(max = 45)
+    @NotNull
+    @Column(name = COLUMN_PRIMERNOMBRE_NAME, nullable = false, length = 45)
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
 
-    @Column(name = "SegundoNombre", length = 100)
-    private String SegundoNombre;
+    @Size(max = 100)
+    @Column(name = COLUMN_SEGUNDONOMBRE_NAME, length = 100)
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
 
-    @Column(name = "PrimerApellido", length = 50, nullable = false)
-    private String PrimerApellido;
+    @Size(max = 45)
+    @NotNull
+    @Column(name = COLUMN_PRIMERAPELLIDO_NAME, nullable = false, length = 45)
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
 
-    @Column(name = "SegundoApellido", length = 50)
-    private String SegundoApellido;
+    @Size(max = 100)
+    @Column(name = COLUMN_SEGUNDOAPELLIDO_NAME, length = 100)
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
 
-    //Relación de Muchos a Muchos Entre Persona y Prestamo
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "persona_prestamo",
-            joinColumns = @JoinColumn(name = "id_persona", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "id_prestamo", nullable = false))
-    private Set<Prestamo> prestamos;
+    @Size(max = 15)
+    @Column(name = COLUMN_CELULAR_NAME, length = 15)
+    public String getCelular() {
+        return celular;
+    }
+
 }
