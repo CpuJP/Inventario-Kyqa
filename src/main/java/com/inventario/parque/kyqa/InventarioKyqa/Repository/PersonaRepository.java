@@ -13,7 +13,7 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer>, JpaS
     Optional<Persona> findByDocumento(String documento);
 
     @Transactional(readOnly = true)
-    List<Persona> findByPrimerApellidoLike(String lastname);
+    List<Persona> findByPrimerApellidoContainingIgnoreCase(String lastname);
 
     @Transactional(readOnly = true)
     Boolean existsPersonaByDocumento(String documento);

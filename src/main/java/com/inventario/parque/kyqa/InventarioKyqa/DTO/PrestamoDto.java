@@ -1,6 +1,5 @@
 package com.inventario.parque.kyqa.InventarioKyqa.DTO;
 
-import com.inventario.parque.kyqa.InventarioKyqa.Entity.PrestamoId;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ import java.time.Instant;
  */
 @Data
 public class PrestamoDto implements Serializable {
-    private final PrestamoId id;
+    private final Integer id;
     private final PersonaDto personaIdpersona;
     private final InventarioDto inventarioIdinventario;
     private final Instant fechaSalida;

@@ -16,4 +16,6 @@ public interface PersonaService {
     ResponseEntity<Persona> existsPerson(@PathVariable String document);
     ResponseEntity<Persona> findById(@PathVariable Integer id);
     ResponseEntity<Persona> createPerson(@RequestBody Persona persona, @RequestHeader HttpHeaders headers);
+    ResponseEntity<Persona> updatePerson(@RequestBody Persona persona);
+    ResponseEntity<Persona> deletePerson(@PathVariable Integer id);
 }

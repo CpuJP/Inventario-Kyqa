@@ -53,4 +53,14 @@ public class PersonaController {
     public ResponseEntity<Persona> save(@RequestBody Persona persona, @RequestHeader HttpHeaders headers) {
         return personService.createPerson(persona, headers);
     }
+
+    @PutMapping("/updateperson")
+    public ResponseEntity<Persona> updatePerson(@RequestBody Persona persona) {
+        return personService.updatePerson(persona);
+    }
+
+    @DeleteMapping("/deleteperson/{id}")
+    public ResponseEntity<Persona> deletePerson(@PathVariable Integer id) {
+        return  personService.deletePerson(id);
+    }
 }

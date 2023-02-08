@@ -21,6 +21,7 @@ import java.time.Instant;
 public class Prestamo implements Serializable {
     public static final String ENTITY_NAME = "Prestamo";
     public static final String TABLE_NAME = "prestamo";
+    public static final String COLUMN_ID_NAME = "idPrestamo";
     public static final String COLUMN_FECHASALIDA_NAME = "fechaSalida";
     public static final String COLUMN_ESTADOSALIDA_NAME = "estadoSalida";
     public static final String COLUMN_FIRMASALIDA_NAME = "firmaSalida";
@@ -31,7 +32,7 @@ public class Prestamo implements Serializable {
     private static final long serialVersionUID = 5703408910511441330L;
 
 
-    private PrestamoId id;
+    private Integer id;
 
     private Persona personaIdpersona;
 
@@ -51,9 +52,10 @@ public class Prestamo implements Serializable {
 
     private String area;
 
-    @EmbeddedId
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public PrestamoId getId() {
+    @Column(name = COLUMN_ID_NAME, nullable = false)
+    public Integer getId() {
         return id;
     }
 
